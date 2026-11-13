@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZUNDAring</title>
+<script
+  src="https://https://drawer5740.github.io/script4ring/main.js"
+  id="script4link"
+  data-members="ZR zundamon.lives-in-the.cloud"
+  defer>
+</script>
+<!-- thisll be some other site l8r -->
+<style>
+:root {
+  --bg: #956fb8;
+  --dots: #8865ad;
+  --dark: #627478;
+  --light: #c0fc8a;
+  --green: #769839;
+  --text: #211b29;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: radial-gradient(circle, var(--dots) 5px, transparent 5.5px);
+  background-size: 34px 34px;
+  color: var(--text);
+  font: 15px/1.7 Verdana, sans-serif;
+}
+
+/* HEADER */
+
+header {
+  background: var(--dark);
+  color: white;
+  padding: 16px max(20px, calc((100% - 760px) / 2));
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+header img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 27px;
+}
+
+/* MAIN */
+
+main {
+  max-width: 760px;
+  width: calc(100% - 36px);
+  margin: auto;
+  padding: 22px 0;
+}
+
+/* NAVIGATION */
+
+nav {
+  display: flex;
+  gap: 20px;
+  border-bottom: 2px solid var(--green);
+  margin-bottom: 22px;
+}
+
+nav button {
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  color: #292330;
+  font: bold 14px Verdana;
+  cursor: pointer;
+}
+
+nav button[aria-selected="true"] {
+  color: #263a25;
+  border-bottom-color: var(--light);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 22px 0 10px;
+}
+
+h3 {
+  font-size: 17px;
+}
+
+a {
+  color: #344c29;
+}
+
+/* HOME */
+
+.home {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 22px;
+  align-items: start;
+}
+
+.side {
+  display: grid;
+  gap: 14px;
+  padding-top: 8px;
+}
+
+.side iframe {
+  width: 180px;
+  height: 180px;
+  border: 0;
+}
+
+/* WIDGET */
+
+.widget {
+  max-width: 100%;
+  height: auto;
+}
+
+.code-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+}
+
+.code-title h2 {
+  font-size: 17px;
+}
+
+.copy {
+  padding: 6px 12px;
+  border: 1px solid var(--green);
+  background: var(--light);
+  color: #24351c;
+  font: bold 12px Verdana;
+  cursor: pointer;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 12px;
+  background: #eee6f5;
+  border: 1px solid var(--green);
+  color: #211b29;
+  font: 12px/1.6 Consolas, monospace;
+}
+
+.note {
+  color: #392d43;
+  font-size: 12px;
+}
+
+/* MEMBERS */
+
+.member {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--green);
+}
+
+.member img {
+  width: 88px;
+  height: 31px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.member a {
+  font-weight: bold;
+}
+
+.member p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #382d43;
+}
+
+/* JOIN */
+
+#join iframe {
+  width: 100%;
+  border: 0;
+  min-height: 100px;
+}
+
+/* ZUNDAMON */
+
+.pet {
+  display: block;
+  width: 80px;
+  max-height: 120px;
+  object-fit: contain;
+  margin: 12px auto 25px;
+  cursor: pointer;
+  transform-origin: bottom center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.pet:focus-visible {
+  outline: 2px solid var(--light);
+  outline-offset: 5px;
+}
+
+.pet.jump {
+  animation: pet-hop 420ms ease-out;
+}
+
+@keyframes pet-hop {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(-22px);
+  }
+
+  75% {
+    transform: translateY(-3px);
+  }
+}
+
+/* HEARTS */
+
+.heart {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  color: #ff334f;
+  font-family: Verdana, sans-serif;
+  line-height: 1;
+  animation: heart-float 1000ms ease-out forwards;
+}
+
+@keyframes heart-float {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(.5);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translate(0, -8px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), -100px) scale(.7);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .home {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    display: grid;
+    grid-template-columns: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet.jump,
+  .heart {
+    animation-duration: 1ms;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="/logo.png" alt="">
+  <h1>ZUNDAring</h1>
+</header>
+
+<main>
+
+  <!-- NAVIGATION -->
+
+  <nav aria-label="Navigation">
+    <button data-tab="home" aria-selected="true">Home</button>
+    <button data-tab="members" aria-selected="false">Members</button>
+    <button data-tab="join" aria-selected="false">Join</button>
+  </nav>
+
+  <!-- HOME -->
+
+  <section id="home">
+    <div class="home">
+
+      <div>
+ <h1>About</h1>
+        <p>this site is for zundamon enthusiasts and enjoyers</p>
+
+        <h2>Widget preview</h2>
+
+        <img class="widget" src="/widget.png"
+             usemap="#image-map" alt="ZUNDAring widget">
+
+        <map name="image-map">
+          <area alt="prev" title="prev"
+            href="https://zundamon.lives-in-the.cloud/?zr-previous"
+            coords="197,263,126,187" shape="rect">
+
+          <area alt="rand" title="rand"
+            href="https://zundamon.lives-in-the.cloud/?random"
+            coords="282,269,218,176" shape="rect">
+
+          <area alt="next" title="next"
+            href="https://zundamon.lives-in-the.cloud/?zr-next"
+            coords="368,260,300,188" shape="rect">
+        </map>
+
+        <div class="code-title">
+          <h2>Widget code</h2>
+          <button class="copy" id="copy">Copy</button>
+        </div>
+
+        <pre><code id="widget-code">&lt;img src="/widget.png" usemap="#image-map"&gt;
+
+&lt;map name="image-map"&gt;
+  &lt;area alt="prev" title="prev" href="https://zundamon.lives-in-the.cloud/?sluggy-previous" coords="197,263,126,187" shape="rect"&gt;
+  &lt;area alt="rand" title="rand" href="https://zundamon.lives-in-the.cloud/?random" coords="282,269,218,176" shape="rect"&gt;
+  &lt;area alt="next" title="next" href="https://zundamon.lives-in-the.cloud/?yourslug-next" coords="368,260,300,188" shape="rect"&gt;
+&lt;/map&gt;</code></pre>
+
+        <p class="note">
+          (replace sluggy and yourslug with your chosen slug)
+        </p>
+      </div>
+
+      <!-- SIDE WIDGETS -->
+
+      <aside class="side">
+        <iframe
+          src="https://evehibi.nekoweb.org/ringlink/"
+          name="ringlink"
+          title="Ringlink"
+          width="180"
+          height="180">
+        </iframe>
+
+        <iframe
+          src="https://nvlk.dimden.dev/"
+          name="neolink"
+          title="Neolink"
+          width="180"
+          height="180">
+        </iframe>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- MEMBERS -->
+
+  <section id="members" hidden>
+    <div id="member-list"></div>
+  </section>
+
+  <!-- JOIN -->
+
+  <section id="join" hidden>
+    <iframe
+      data-tally-src="https://tally.so/embed/RWMgZ4?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
+      loading="lazy"
+      width="100%"
+      height="100"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      title="Zundajoin">
+    </iframe>
+  </section>
+
+</main>
+
+<!-- RANDOM ZUNDAMON -->
+
+<img
+  class="pet"
+  id="pet"
+  src="/zundamon1.png"
+  alt="Zundamon"
+  role="button"
+  tabindex="0"
+  aria-label="Click Zundamon for a surprise">
+
+<script>
+
+// MEMBERS: ADD YOUR SITES HERE
+
+const MEMBERS = [
+ {
+  badge: "/88x31.png",
+  name: "ZUNDAring",
+  url: "https://zundamon.lives-in-the.cloud",
+  description: "Site description"
+ },
+];
+
+// CREATE MEMBER LIST
+
+const list = document.getElementById("member-list");
+
+MEMBERS.forEach(member => {
+  const row = document.createElement("div");
+  row.className = "member";
+
+  const badge = document.createElement("img");
+  badge.src = member.badge;
+  badge.alt = "";
+
+  const details = document.createElement("div");
+
+  const link = document.createElement("a");
+  link.href = member.url;
+  link.textContent = member.name;
+
+  const desc = document.createElement("p");
+  desc.textContent = member.description;
+
+  details.append(link, desc);
+  row.append(badge, details);
+  list.append(row);
+});
+
+
+// TAB SWITCHING
+
+document.querySelectorAll("[data-tab]").forEach(button => {
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll("[data-tab]").forEach(tab => {
+      tab.setAttribute("aria-selected", tab === button);
+    });
+
+    ["home", "members", "join"].forEach(id => {
+      document.getElementById(id).hidden =
+        id !== button.dataset.tab;
+    });
+
+  });
+});
+
+
+// COPY WIDGET CODE
+
+document.getElementById("copy").addEventListener("click", async () => {
+  const button = document.getElementById("copy");
+
+  try {
+    await navigator.clipboard.writeText(
+      document.getElementById("widget-code").textContent
+    );
+
+    button.textContent = "Copied!";
+    setTimeout(() => button.textContent = "Copy", 1500);
+
+  } catch {
+    button.textContent = "Copy failed";
+  }
+});
+
+
+// RANDOM ZUNDAMON IMAGE
+
+const pets = [
+  "/zundamon1.png",
+  "/zundamon2.png",
+  "/zundamon3.png"
+];
+
+const pet = document.getElementById("pet");
+
+pet.src = pets[Math.floor(Math.random() * pets.length)];
+
+
+// ZUNDAMON JUMP AND HEARTS
+
+function petSurprise() {
+
+  // Straight upward jump, no rotation
+  pet.classList.remove("jump");
+  void pet.offsetWidth;
+  pet.classList.add("jump");
+
+  pet.onanimationend = () => {
+    pet.classList.remove("jump");
+  };
+
+  // Get Zundamon's image position
+  const rect = pet.getBoundingClientRect();
+
+  // Create five hearts
+  for (let i = 0; i < 5; i++) {
+
+    const heart = document.createElement("span");
+
+    heart.className = "heart";
+    heart.textContent = "♥";
+    heart.setAttribute("aria-hidden", "true");
+
+    // Upper-right quarter of the image
+    const x = rect.left + rect.width * (
+      0.5 + Math.random() * 0.5
+    );
+
+    const y = rect.top + rect.height * (
+      Math.random() * 0.25
+    );
+
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+    // Slight random sideways movement
+    heart.style.setProperty(
+      "--drift",
+      (Math.random() * 70 - 35) + "px"
+    );
+
+    heart.style.fontSize =
+      (14 + Math.random() * 12) + "px";
+
+    heart.style.animationDuration =
+      (800 + Math.random() * 400) + "ms";
+
+    document.body.appendChild(heart);
+
+    // Remove heart after animation
+    heart.addEventListener("animationend", () => {
+      heart.remove();
+    });
+  }
+}
+
+
+// CLICK ZUNDAMON
+
+pet.addEventListener("click", petSurprise);
+
+// KEYBOARD SUPPORT
+
+pet.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    petSurprise();
+  }
+});
+
+</script>
+
+<!-- TALLY EMBED SCRIPT -->
+
+<script>
+var d=document,w="https://tally.so/widgets/embed.js",
+v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():
+d.querySelectorAll("iframe[data-tally-src]:not([src])")
+.forEach(function(e){e.src=e.dataset.tallySrc})};
+
+if("undefined"!=typeof Tally)v();
+else if(d.querySelector('script[src="'+w+'"]')==null){
+var s=d.createElement("script");
+s.src=w;
+s.onload=v;
+s.onerror=v;
+d.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>
