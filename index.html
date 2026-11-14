@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZUNDAring</title>
 
-<!-- Webring script -->
 <script
   src="https://drawer5740.github.io/script4ring/main.js"
   id="script4link"
@@ -14,15 +13,8 @@
   defer>
 </script>
 
-<!-- Favicons -->
 <link rel="icon" href="/logo.png" type="image/png">
-<link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/logo.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
-
+<link rel="apple-touch-icon" href="/logo.png">
 <meta name="theme-color" content="#956fb8">
 
 <style>
@@ -48,8 +40,6 @@ body {
   font: 15px/1.7 Verdana, sans-serif;
 }
 
-/* HEADER */
-
 header {
   background: var(--dark);
   color: white;
@@ -71,17 +61,12 @@ header h1 {
   font-size: 27px;
 }
 
-/* MAIN */
-
 main {
   max-width: 760px;
   width: calc(100% - 36px);
   margin: auto;
   padding: 22px 0;
-  min-width: 0;
 }
-
-/* NAVIGATION */
 
 nav {
   display: flex;
@@ -138,7 +123,6 @@ a {
 
 .side {
   display: grid;
-  grid-template-columns: 1fr;
   justify-items: start;
   gap: 14px;
   padding-top: 8px;
@@ -161,11 +145,21 @@ a {
 
 /* WIDGET */
 
+#widget-container {
+  width: max-content;
+  max-width: 100%;
+}
+
 .widget {
   display: block;
   max-width: 100%;
   height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
+
+/* COPY CODE */
 
 .code-title {
   display: flex;
@@ -213,7 +207,6 @@ pre {
   align-items: flex-start;
   padding: 12px 0;
   border-bottom: 1px solid var(--green);
-  min-width: 0;
 }
 
 .member img {
@@ -281,8 +274,6 @@ pre {
   }
 }
 
-/* HEARTS */
-
 .heart {
   position: fixed;
   z-index: 100;
@@ -310,7 +301,7 @@ pre {
   }
 }
 
-/* TABLETS AND PHONES */
+/* MOBILE */
 
 @media (max-width: 600px) {
   header {
@@ -336,29 +327,17 @@ pre {
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    padding-top: 0;
   }
 
   .side iframe {
     width: 180px;
     height: 180px;
-    max-width: 100%;
-  }
-
-  .side img {
-    max-width: 100%;
-  }
-
-  .widget {
-    width: 100%;
   }
 
   pre {
     font-size: 11px;
   }
 }
-
-/* VERY NARROW PHONES */
 
 @media (max-width: 360px) {
   main {
@@ -376,19 +355,50 @@ pre {
   header h1 {
     font-size: 23px;
   }
-
-  .code-title h2 {
-    font-size: 15px;
-  }
 }
-
-/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
   .pet.jump,
   .heart {
     animation-duration: 1ms;
   }
+}
+
+/* WIDGET-ONLY MODE */
+
+html.widget-mode,
+html.widget-mode body {
+  width: max-content;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+  background-image: none !important;
+}
+
+html.widget-mode body {
+  overflow: hidden;
+}
+
+html.widget-mode header,
+html.widget-mode main,
+html.widget-mode .pet {
+  display: none !important;
+}
+
+html.widget-mode #widget-container {
+  display: block;
+  width: max-content;
+  max-width: none;
+  margin: 0;
+}
+
+html.widget-mode #widget-image {
+  display: block;
+  max-width: none;
+  width: auto;
+  height: auto;
 }
 </style>
 </head>
@@ -401,8 +411,6 @@ pre {
 </header>
 
 <main>
-
-  <!-- NAVIGATION -->
 
   <nav aria-label="Navigation" role="tablist">
     <button data-tab="home" role="tab" aria-selected="true">Home</button>
@@ -423,53 +431,62 @@ pre {
 
         <h2>Widget preview</h2>
 
-        <img
-          class="widget"
-          id="widget-image"
-          src="/widget.png"
-          usemap="#image-map"
-          alt="ZUNDAring widget">
+        <div id="widget-container">
 
-        <map name="image-map">
-          <area alt="prev" title="prev"
-            href="https://zundamon.lives-in-the.cloud/?zr-previous"
-            coords="197,263,126,187" shape="rect">
+          <img
+            class="widget"
+            id="widget-image"
+            src="/Untitled74_20261114174857.png"
+            usemap="#image-map"
+            alt="ZUNDAring widget"
+            draggable="false">
 
-          <area alt="rand" title="rand"
-            href="https://zundamon.lives-in-the.cloud/?random"
-            coords="282,269,218,176" shape="rect">
+          <map name="image-map">
 
-          <area alt="next" title="next"
-            href="https://zundamon.lives-in-the.cloud/?zr-next"
-            coords="368,260,300,188" shape="rect">
-        </map>
+            <area target="_blank" alt="prev" title="prev"
+              href="https://zundamon.lives-in-the.cloud/?zr-previous"
+              coords="128,134,199,207" shape="rect">
+
+            <area target="_blank" alt="rand" title="rand"
+              href="https://zundamon.lives-in-the.cloud/?random"
+              coords="219,124,282,210" shape="rect">
+
+            <area target="_blank" alt="next" title="next"
+              href="https://zundamon.lives-in-the.cloud/?zr-next"
+              coords="301,140,371,203" shape="rect">
+
+            <area target="_blank" alt="index" title="index"
+              href="https://zundamon.lives-in-the.cloud/"
+              coords="208,214,291,297" shape="rect">
+
+          </map>
+
+        </div>
 
         <div class="code-title">
           <h2>Widget code</h2>
           <button class="copy" id="copy">Copy</button>
         </div>
 
-        <pre><code id="widget-code">&lt;img src="/widget.png" usemap="#image-map"&gt;
+        <pre><code id="widget-code">&lt;img src="https://zundamon.lives-in-the.cloud/Untitled74_20261114174857.png" usemap="#image-map" draggable="false"&gt;
 
 &lt;map name="image-map"&gt;
-  &lt;area alt="prev" title="prev" href="https://zundamon.lives-in-the.cloud/?sluggy-previous" coords="197,263,126,187" shape="rect"&gt;
-  &lt;area alt="rand" title="rand" href="https://zundamon.lives-in-the.cloud/?random" coords="282,269,218,176" shape="rect"&gt;
-  &lt;area alt="next" title="next" href="https://zundamon.lives-in-the.cloud/?yourslug-next" coords="368,260,300,188" shape="rect"&gt;
+  &lt;area target="_blank" alt="prev" title="prev" href="https://zundamon.lives-in-the.cloud/?zr-previous" coords="128,134,199,207" shape="rect"&gt;
+  &lt;area target="_blank" alt="rand" title="rand" href="https://zundamon.lives-in-the.cloud/?random" coords="219,124,282,210" shape="rect"&gt;
+  &lt;area target="_blank" alt="next" title="next" href="https://zundamon.lives-in-the.cloud/?zr-next" coords="301,140,371,203" shape="rect"&gt;
+  &lt;area target="_blank" alt="index" title="index" href="https://zundamon.lives-in-the.cloud/" coords="208,214,291,297" shape="rect"&gt;
 &lt;/map&gt;</code></pre>
 
         <p class="note">
-          (replace sluggy and yourslug with your chosen slug)
+          (The widget image and map coordinates are included above.)
         </p>
 
       </div>
 
-      <!-- RINGLINK AND NEOLINK -->
-
       <aside class="side">
 
         <a href="https://evehibi.nekoweb.org/ringlink/info.html"
-           target="_blank"
-           rel="noopener noreferrer">
+           target="_blank" rel="noopener noreferrer">
           <img
             src="https://evehibi.nekoweb.org/ringlink/button.gif"
             alt="Ringlink - advertise your webring!">
@@ -508,6 +525,7 @@ pre {
   <!-- JOIN -->
 
   <section id="join" role="tabpanel" hidden>
+
     <iframe
       data-tally-src="https://tally.so/embed/RWMgZ4?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
       loading="lazy"
@@ -518,6 +536,7 @@ pre {
       marginwidth="0"
       title="Zundajoin">
     </iframe>
+
   </section>
 
 </main>
@@ -535,7 +554,7 @@ pre {
 
 <script>
 
-// MEMBERS: ADD YOUR SITES HERE
+// MEMBERS
 
 const MEMBERS = [
   {
@@ -545,8 +564,6 @@ const MEMBERS = [
     description: "Webring for ZUNDAMON fans"
   },
 ];
-
-// CREATE MEMBER LIST
 
 const list = document.getElementById("member-list");
 
@@ -573,21 +590,18 @@ MEMBERS.forEach(member => {
 });
 
 
-// TAB SWITCHING
+// TABS
 
 document.querySelectorAll("[data-tab]").forEach(button => {
   button.addEventListener("click", () => {
-
     document.querySelectorAll("[data-tab]").forEach(tab => {
-      const selected = tab === button;
-      tab.setAttribute("aria-selected", String(selected));
+      tab.setAttribute("aria-selected", tab === button);
     });
 
     ["home", "members", "join"].forEach(id => {
       document.getElementById(id).hidden =
         id !== button.dataset.tab;
     });
-
   });
 });
 
@@ -611,7 +625,7 @@ document.getElementById("copy").addEventListener("click", async () => {
 });
 
 
-// RANDOM ZUNDAMON IMAGE
+// RANDOM ZUNDAMON
 
 const pets = [
   "/zundamon1.png",
@@ -627,7 +641,6 @@ pet.src = pets[Math.floor(Math.random() * pets.length)];
 // ZUNDAMON JUMP AND HEARTS
 
 function petSurprise() {
-
   pet.classList.remove("jump");
   void pet.offsetWidth;
   pet.classList.add("jump");
@@ -639,14 +652,11 @@ function petSurprise() {
   const rect = pet.getBoundingClientRect();
 
   for (let i = 0; i < 5; i++) {
-
     const heart = document.createElement("span");
 
     heart.className = "heart";
     heart.textContent = "♥";
     heart.setAttribute("aria-hidden", "true");
-
-    // Upper-right quarter of the image
 
     const x = rect.left + rect.width * (
       0.5 + Math.random() * 0.5
@@ -672,18 +682,11 @@ function petSurprise() {
 
     document.body.appendChild(heart);
 
-    heart.addEventListener("animationend", () => {
-      heart.remove();
-    });
+    heart.addEventListener("animationend", () => heart.remove());
   }
 }
 
-
-// CLICK ZUNDAMON
-
 pet.addEventListener("click", petSurprise);
-
-// KEYBOARD SUPPORT
 
 pet.addEventListener("keydown", event => {
   if (event.key === "Enter" || event.key === " ") {
@@ -693,32 +696,78 @@ pet.addEventListener("keydown", event => {
 });
 
 
-// RESPONSIVE WIDGET IMAGE MAP
-// Scales the clickable areas when the widget image resizes.
+// WIDGET-ONLY QUERY MODE AND SIZE OPTIONS
 
+const params = new URLSearchParams(window.location.search);
+const widgetContainer = document.getElementById("widget-container");
 const widgetImage = document.getElementById("widget-image");
+
+function getPixelSize(name) {
+  const value = params.get(name);
+
+  if (value === null || !/^\d+(\.\d+)?$/.test(value)) {
+    return null;
+  }
+
+  const size = Number(value);
+
+  if (!Number.isFinite(size) || size <= 0) {
+    return null;
+  }
+
+  return Math.min(size, 5000);
+}
+
+if (params.has("widget")) {
+  document.documentElement.classList.add("widget-mode");
+
+  // Show only the image and its image map.
+  document.body.append(widgetContainer);
+
+  const requestedWidth = getPixelSize("width");
+  const requestedHeight = getPixelSize("height");
+
+  // No dimensions means the image uses its natural dimensions.
+  // One dimension preserves its aspect ratio.
+  // Two dimensions stretch it to the exact requested size.
+
+  if (requestedWidth !== null) {
+    widgetImage.style.width = requestedWidth + "px";
+  }
+
+  if (requestedHeight !== null) {
+    widgetImage.style.height = requestedHeight + "px";
+  }
+}
+
+
+// RESPONSIVE IMAGE MAP COORDINATES
+
 const widgetAreas = document.querySelectorAll(
   'map[name="image-map"] area'
 );
 
+// Keep the original coordinates as the source of truth.
+const originalCoords = [...widgetAreas].map(area =>
+  area.coords.split(",").map(Number)
+);
+
 function resizeWidgetMap() {
-  if (!widgetImage.naturalWidth) return;
+  if (!widgetImage.naturalWidth || !widgetImage.naturalHeight) {
+    return;
+  }
 
   const scaleX = widgetImage.clientWidth / widgetImage.naturalWidth;
   const scaleY = widgetImage.clientHeight / widgetImage.naturalHeight;
 
-  widgetAreas.forEach(area => {
-    if (!area.dataset.originalCoords) {
-      area.dataset.originalCoords = area.coords;
-    }
-
-    const original = area.dataset.originalCoords
-      .split(",")
-      .map(Number);
-
-    area.coords = original.map((value, index) => {
-      return Math.round(value * (index % 2 === 0 ? scaleX : scaleY));
-    }).join(",");
+  widgetAreas.forEach((area, index) => {
+    area.coords = originalCoords[index]
+      .map((value, coordinateIndex) =>
+        Math.round(
+          value * (coordinateIndex % 2 === 0 ? scaleX : scaleY)
+        )
+      )
+      .join(",");
   });
 }
 
@@ -729,9 +778,13 @@ if (widgetImage.complete) {
   resizeWidgetMap();
 }
 
+if ("ResizeObserver" in window) {
+  new ResizeObserver(resizeWidgetMap).observe(widgetImage);
+}
+
 </script>
 
-<!-- TALLY EMBED SCRIPT -->
+<!-- TALLY EMBED -->
 
 <script>
 var d=document,w="https://tally.so/widgets/embed.js",
