@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,8 +109,6 @@ a {
   color: #344c29;
 }
 
-/* HOME */
-
 .home {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 180px;
@@ -143,8 +142,6 @@ a {
   height: auto;
 }
 
-/* WIDGET */
-
 #widget-container {
   width: max-content;
   max-width: 100%;
@@ -158,8 +155,6 @@ a {
   -webkit-user-select: none;
   -webkit-user-drag: none;
 }
-
-/* COPY CODE */
 
 .code-title {
   display: flex;
@@ -199,8 +194,6 @@ pre {
   font-size: 12px;
 }
 
-/* MEMBERS */
-
 .member {
   display: flex;
   gap: 12px;
@@ -227,8 +220,6 @@ pre {
   color: #382d43;
 }
 
-/* JOIN */
-
 #join {
   width: 100%;
   background: #fff;
@@ -244,8 +235,6 @@ pre {
   background: #fff;
 }
 
-/* ZUNDAMON */
-
 .pet {
   display: block;
   width: 80px;
@@ -256,7 +245,9 @@ pre {
   cursor: pointer;
   transform-origin: bottom center;
   user-select: none;
+  -webkit-user-select: none;
   -webkit-user-drag: none;
+  touch-action: manipulation;
 }
 
 .pet:focus-visible {
@@ -265,20 +256,41 @@ pre {
 }
 
 .pet.jump {
-  animation: pet-hop 420ms ease-out;
+  animation: pet-hop 650ms cubic-bezier(.22,.8,.3,1) both;
+}
+
+.pet.busy {
+  pointer-events: none;
+  cursor: default;
 }
 
 @keyframes pet-hop {
-  0%, 100% {
-    transform: translateY(0);
+  0% {
+    transform: translateY(0) scale(1);
   }
 
-  45% {
-    transform: translateY(-22px);
+  12% {
+    transform: translateY(2px) scale(1.08,.88);
   }
 
-  75% {
-    transform: translateY(-3px);
+  35% {
+    transform: translateY(-12px) scale(.97,1.04);
+  }
+
+  58% {
+    transform: translateY(-29px) scale(1);
+  }
+
+  72% {
+    transform: translateY(-25px) scale(1);
+  }
+
+  88% {
+    transform: translateY(2px) scale(1.09,.90);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -308,8 +320,6 @@ pre {
     transform: translate(var(--drift), -100px) scale(.7);
   }
 }
-
-/* MOBILE */
 
 @media (max-width: 600px) {
   header {
@@ -372,8 +382,6 @@ pre {
   }
 }
 
-/* WIDGET-ONLY MODE */
-
 html.widget-mode,
 html.widget-mode body {
   width: max-content;
@@ -420,16 +428,12 @@ html.widget-mode #widget-image {
 
 <main>
 
-  <!-- NAVIGATION -->
-
   <nav aria-label="Navigation" role="tablist">
     <button data-tab="home" role="tab" aria-selected="true">Home</button>
     <button data-tab="members" role="tab" aria-selected="false">Members</button>
     <button data-tab="join" role="tab" aria-selected="false">Join</button>
     <button data-tab="extra" role="tab" aria-selected="false">Extra stuff</button>
   </nav>
-
-  <!-- HOME -->
 
   <section id="home" role="tabpanel">
 
@@ -526,13 +530,9 @@ html.widget-mode #widget-image {
 
   </section>
 
-  <!-- MEMBERS -->
-
   <section id="members" role="tabpanel" hidden>
     <div id="member-list"></div>
   </section>
-
-  <!-- JOIN -->
 
   <section id="join" role="tabpanel" hidden>
 
@@ -549,11 +549,7 @@ html.widget-mode #widget-image {
 
   </section>
 
-  <!-- EXTRA STUFF -->
-
   <section id="extra" role="tabpanel" hidden>
-
-    <!-- h1, h2, h3, p, ul, ol, pre, code, images, img here. -->
 
     <h1>Featured in</h1>
 
@@ -565,8 +561,6 @@ html.widget-mode #widget-image {
 
 </main>
 
-<!-- RANDOM ZUNDAMON -->
-
 <img
   class="pet"
   id="pet"
@@ -577,9 +571,6 @@ html.widget-mode #widget-image {
   aria-label="Click Zundamon for a surprise">
 
 <script>
-
-// MEMBERS
-
 const MEMBERS = [
   {
     badge: "/88x31.png",
@@ -613,9 +604,6 @@ MEMBERS.forEach(member => {
   list.append(row);
 });
 
-
-// TABS
-
 document.querySelectorAll("[data-tab]").forEach(button => {
   button.addEventListener("click", () => {
     document.querySelectorAll("[data-tab]").forEach(tab => {
@@ -628,9 +616,6 @@ document.querySelectorAll("[data-tab]").forEach(button => {
     });
   });
 });
-
-
-// COPY WIDGET CODE
 
 document.getElementById("copy").addEventListener("click", async () => {
   const button = document.getElementById("copy");
@@ -648,9 +633,6 @@ document.getElementById("copy").addEventListener("click", async () => {
   }
 });
 
-
-// RANDOM ZUNDAMON
-
 const pets = [
   "/zundamon1.png",
   "/zundamon2.png",
@@ -659,21 +641,34 @@ const pets = [
 
 const pet = document.getElementById("pet");
 
-pet.src = pets[Math.floor(Math.random() * pets.length)];
+const originalPet = pets[
+  Math.floor(Math.random() * pets.length)
+];
 
+pet.src = originalPet;
 
-// ZUNDAMON JUMP AND HEARTS
+let petBusy = false;
 
 function petSurprise() {
+  if (petBusy) return;
+
+  petBusy = true;
+
+  pet.classList.add("busy");
+  pet.setAttribute("aria-disabled", "true");
+  pet.tabIndex = -1;
+
+  const rect = pet.getBoundingClientRect();
+
+  const blushPet = originalPet === "/zundamon1.png"
+    ? "/zundamonblushduck.png"
+    : "/zundamonblush.png";
+
+  pet.src = blushPet;
+
   pet.classList.remove("jump");
   void pet.offsetWidth;
   pet.classList.add("jump");
-
-  pet.onanimationend = () => {
-    pet.classList.remove("jump");
-  };
-
-  const rect = pet.getBoundingClientRect();
 
   for (let i = 0; i < 5; i++) {
     const heart = document.createElement("span");
@@ -706,8 +701,18 @@ function petSurprise() {
 
     document.body.appendChild(heart);
 
-    heart.addEventListener("animationend", () => heart.remove());
+    heart.addEventListener("animationend", () => {
+      heart.remove();
+    });
   }
+
+  setTimeout(() => {
+    pet.src = originalPet;
+    pet.classList.remove("jump", "busy");
+    pet.removeAttribute("aria-disabled");
+    pet.tabIndex = 0;
+    petBusy = false;
+  }, 2000);
 }
 
 pet.addEventListener("click", petSurprise);
@@ -718,9 +723,6 @@ pet.addEventListener("keydown", event => {
     petSurprise();
   }
 });
-
-
-// WIDGET-ONLY QUERY MODE AND SIZE OPTIONS
 
 const params = new URLSearchParams(window.location.search);
 const widgetContainer = document.getElementById("widget-container");
@@ -744,7 +746,6 @@ function getPixelSize(name) {
 
 if (params.has("widget")) {
   document.documentElement.classList.add("widget-mode");
-
   document.body.append(widgetContainer);
 
   const requestedWidth = getPixelSize("width");
@@ -758,9 +759,6 @@ if (params.has("widget")) {
     widgetImage.style.height = requestedHeight + "px";
   }
 }
-
-
-// RESPONSIVE IMAGE MAP COORDINATES
 
 const widgetAreas = document.querySelectorAll(
   'map[name="image-map"] area'
@@ -799,10 +797,7 @@ if (widgetImage.complete) {
 if ("ResizeObserver" in window) {
   new ResizeObserver(resizeWidgetMap).observe(widgetImage);
 }
-
 </script>
-
-<!-- TALLY EMBED -->
 
 <script>
 var d=document,w="https://tally.so/widgets/embed.js",
