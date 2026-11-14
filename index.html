@@ -1,33 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZUNDAring</title>
+
+<!-- Webring script -->
 <script
-  src="https://https://drawer5740.github.io/script4ring/main.js"
+  src="https://drawer5740.github.io/script4ring/main.js"
   id="script4link"
   data-members="ZR zundamon.lives-in-the.cloud"
   defer>
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZUNDAring</title>
-<!-- Standard favicon -->
-<link rel="icon" href="/logo.png" type="image/png">
 
-<!-- Common favicon sizes -->
+<!-- Favicons -->
+<link rel="icon" href="/logo.png" type="image/png">
 <link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/logo.png">
-
-<!-- Apple Touch Icon -->
 <link rel="apple-touch-icon" sizes="180x180" href="/logo.png">
-
-<!-- Android / PWA -->
 <link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
 <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
 
-<!-- Theme color -->
 <meta name="theme-color" content="#956fb8">
-<!-- thisll be some other site l8r -->
+
 <style>
 :root {
   --bg: #956fb8;
@@ -66,6 +63,7 @@ header img {
   width: 48px;
   height: 48px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 header h1 {
@@ -80,6 +78,7 @@ main {
   width: calc(100% - 36px);
   margin: auto;
   padding: 22px 0;
+  min-width: 0;
 }
 
 /* NAVIGATION */
@@ -133,21 +132,37 @@ a {
   align-items: start;
 }
 
+.home-content {
+  min-width: 0;
+}
+
 .side {
   display: grid;
+  grid-template-columns: 1fr;
+  justify-items: start;
   gap: 14px;
   padding-top: 8px;
+  min-width: 0;
 }
 
 .side iframe {
+  display: block;
   width: 180px;
+  max-width: 100%;
   height: 180px;
   border: 0;
+}
+
+.side img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* WIDGET */
 
 .widget {
+  display: block;
   max-width: 100%;
   height: auto;
 }
@@ -156,6 +171,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   margin-top: 22px;
 }
 
@@ -170,15 +186,18 @@ a {
   color: #24351c;
   font: bold 12px Verdana;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 pre {
+  max-width: 100%;
   overflow-x: auto;
   padding: 12px;
   background: #eee6f5;
   border: 1px solid var(--green);
   color: #211b29;
   font: 12px/1.6 Consolas, monospace;
+  white-space: pre;
 }
 
 .note {
@@ -194,6 +213,7 @@ pre {
   align-items: flex-start;
   padding: 12px 0;
   border-bottom: 1px solid var(--green);
+  min-width: 0;
 }
 
 .member img {
@@ -205,6 +225,7 @@ pre {
 
 .member a {
   font-weight: bold;
+  overflow-wrap: anywhere;
 }
 
 .member p {
@@ -216,6 +237,7 @@ pre {
 /* JOIN */
 
 #join iframe {
+  display: block;
   width: 100%;
   border: 0;
   min-height: 100px;
@@ -226,6 +248,7 @@ pre {
 .pet {
   display: block;
   width: 80px;
+  max-width: 100%;
   max-height: 120px;
   object-fit: contain;
   margin: 12px auto 25px;
@@ -287,18 +310,79 @@ pre {
   }
 }
 
-/* MOBILE */
+/* TABLETS AND PHONES */
 
 @media (max-width: 600px) {
+  header {
+    padding: 14px 18px;
+  }
+
+  header h1 {
+    font-size: 25px;
+  }
+
+  main {
+    width: calc(100% - 32px);
+    padding: 18px 0;
+  }
+
   .home {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
   }
 
   .side {
-    display: grid;
-    grid-template-columns: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding-top: 0;
+  }
+
+  .side iframe {
+    width: 180px;
+    height: 180px;
+    max-width: 100%;
+  }
+
+  .side img {
+    max-width: 100%;
+  }
+
+  .widget {
+    width: 100%;
+  }
+
+  pre {
+    font-size: 11px;
   }
 }
+
+/* VERY NARROW PHONES */
+
+@media (max-width: 360px) {
+  main {
+    width: calc(100% - 24px);
+  }
+
+  nav {
+    gap: 16px;
+  }
+
+  nav button {
+    font-size: 13px;
+  }
+
+  header h1 {
+    font-size: 23px;
+  }
+
+  .code-title h2 {
+    font-size: 15px;
+  }
+}
+
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
   .pet.jump,
@@ -320,25 +404,31 @@ pre {
 
   <!-- NAVIGATION -->
 
-  <nav aria-label="Navigation">
-    <button data-tab="home" aria-selected="true">Home</button>
-    <button data-tab="members" aria-selected="false">Members</button>
-    <button data-tab="join" aria-selected="false">Join</button>
+  <nav aria-label="Navigation" role="tablist">
+    <button data-tab="home" role="tab" aria-selected="true">Home</button>
+    <button data-tab="members" role="tab" aria-selected="false">Members</button>
+    <button data-tab="join" role="tab" aria-selected="false">Join</button>
   </nav>
 
   <!-- HOME -->
 
-  <section id="home">
+  <section id="home" role="tabpanel">
+
     <div class="home">
 
-      <div>
- <h1>About</h1>
+      <div class="home-content">
+
+        <h1>About</h1>
         <p>this site is for zundamon enthusiasts and enjoyers</p>
 
         <h2>Widget preview</h2>
 
-        <img class="widget" src="/widget.png"
-             usemap="#image-map" alt="ZUNDAring widget">
+        <img
+          class="widget"
+          id="widget-image"
+          src="/widget.png"
+          usemap="#image-map"
+          alt="ZUNDAring widget">
 
         <map name="image-map">
           <area alt="prev" title="prev"
@@ -370,21 +460,28 @@ pre {
         <p class="note">
           (replace sluggy and yourslug with your chosen slug)
         </p>
+
       </div>
 
-						<a href="https://evehibi.nekoweb.org/ringlink/info.html" target="_blank">
-							<img src="https://evehibi.nekoweb.org/ringlink/button.gif" alt="ringlink - advertise your webring!">
-					    </a>
-				
-      <!-- SIDE WIDGETS -->
+      <!-- RINGLINK AND NEOLINK -->
 
       <aside class="side">
+
+        <a href="https://evehibi.nekoweb.org/ringlink/info.html"
+           target="_blank"
+           rel="noopener noreferrer">
+          <img
+            src="https://evehibi.nekoweb.org/ringlink/button.gif"
+            alt="Ringlink - advertise your webring!">
+        </a>
+
         <iframe
           src="https://evehibi.nekoweb.org/ringlink/"
           name="ringlink"
           title="Ringlink"
           width="180"
-          height="180">
+          height="180"
+          loading="lazy">
         </iframe>
 
         <iframe
@@ -392,22 +489,25 @@ pre {
           name="neolink"
           title="Neolink"
           width="180"
-          height="180">
+          height="180"
+          loading="lazy">
         </iframe>
+
       </aside>
 
     </div>
+
   </section>
 
   <!-- MEMBERS -->
 
-  <section id="members" hidden>
+  <section id="members" role="tabpanel" hidden>
     <div id="member-list"></div>
   </section>
 
   <!-- JOIN -->
 
-  <section id="join" hidden>
+  <section id="join" role="tabpanel" hidden>
     <iframe
       data-tally-src="https://tally.so/embed/RWMgZ4?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
       loading="lazy"
@@ -438,12 +538,12 @@ pre {
 // MEMBERS: ADD YOUR SITES HERE
 
 const MEMBERS = [
- {
-  badge: "/88x31.png",
-  name: "ZUNDAring",
-  url: "https://zundamon.lives-in-the.cloud",
-  description: "Webring for ZUNDAMON fans"
- },
+  {
+    badge: "/88x31.png",
+    name: "ZUNDAring",
+    url: "https://zundamon.lives-in-the.cloud",
+    description: "Webring for ZUNDAMON fans"
+  },
 ];
 
 // CREATE MEMBER LIST
@@ -479,7 +579,8 @@ document.querySelectorAll("[data-tab]").forEach(button => {
   button.addEventListener("click", () => {
 
     document.querySelectorAll("[data-tab]").forEach(tab => {
-      tab.setAttribute("aria-selected", tab === button);
+      const selected = tab === button;
+      tab.setAttribute("aria-selected", String(selected));
     });
 
     ["home", "members", "join"].forEach(id => {
@@ -527,7 +628,6 @@ pet.src = pets[Math.floor(Math.random() * pets.length)];
 
 function petSurprise() {
 
-  // Straight upward jump, no rotation
   pet.classList.remove("jump");
   void pet.offsetWidth;
   pet.classList.add("jump");
@@ -536,10 +636,8 @@ function petSurprise() {
     pet.classList.remove("jump");
   };
 
-  // Get Zundamon's image position
   const rect = pet.getBoundingClientRect();
 
-  // Create five hearts
   for (let i = 0; i < 5; i++) {
 
     const heart = document.createElement("span");
@@ -549,6 +647,7 @@ function petSurprise() {
     heart.setAttribute("aria-hidden", "true");
 
     // Upper-right quarter of the image
+
     const x = rect.left + rect.width * (
       0.5 + Math.random() * 0.5
     );
@@ -560,7 +659,6 @@ function petSurprise() {
     heart.style.left = x + "px";
     heart.style.top = y + "px";
 
-    // Slight random sideways movement
     heart.style.setProperty(
       "--drift",
       (Math.random() * 70 - 35) + "px"
@@ -574,7 +672,6 @@ function petSurprise() {
 
     document.body.appendChild(heart);
 
-    // Remove heart after animation
     heart.addEventListener("animationend", () => {
       heart.remove();
     });
@@ -594,6 +691,43 @@ pet.addEventListener("keydown", event => {
     petSurprise();
   }
 });
+
+
+// RESPONSIVE WIDGET IMAGE MAP
+// Scales the clickable areas when the widget image resizes.
+
+const widgetImage = document.getElementById("widget-image");
+const widgetAreas = document.querySelectorAll(
+  'map[name="image-map"] area'
+);
+
+function resizeWidgetMap() {
+  if (!widgetImage.naturalWidth) return;
+
+  const scaleX = widgetImage.clientWidth / widgetImage.naturalWidth;
+  const scaleY = widgetImage.clientHeight / widgetImage.naturalHeight;
+
+  widgetAreas.forEach(area => {
+    if (!area.dataset.originalCoords) {
+      area.dataset.originalCoords = area.coords;
+    }
+
+    const original = area.dataset.originalCoords
+      .split(",")
+      .map(Number);
+
+    area.coords = original.map((value, index) => {
+      return Math.round(value * (index % 2 === 0 ? scaleX : scaleY));
+    }).join(",");
+  });
+}
+
+widgetImage.addEventListener("load", resizeWidgetMap);
+window.addEventListener("resize", resizeWidgetMap);
+
+if (widgetImage.complete) {
+  resizeWidgetMap();
+}
 
 </script>
 
