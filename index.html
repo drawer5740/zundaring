@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +69,7 @@ main {
 
 nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   border-bottom: 2px solid var(--green);
   margin-bottom: 22px;
@@ -228,7 +228,6 @@ pre {
 }
 
 /* JOIN */
-/* JOIN */
 
 #join {
   width: 100%;
@@ -244,6 +243,7 @@ pre {
   border: 0;
   background: #fff;
 }
+
 /* ZUNDAMON */
 
 .pet {
@@ -420,10 +420,13 @@ html.widget-mode #widget-image {
 
 <main>
 
+  <!-- NAVIGATION -->
+
   <nav aria-label="Navigation" role="tablist">
     <button data-tab="home" role="tab" aria-selected="true">Home</button>
     <button data-tab="members" role="tab" aria-selected="false">Members</button>
     <button data-tab="join" role="tab" aria-selected="false">Join</button>
+    <button data-tab="extra" role="tab" aria-selected="false">Extra stuff</button>
   </nav>
 
   <!-- HOME -->
@@ -546,6 +549,20 @@ html.widget-mode #widget-image {
 
   </section>
 
+  <!-- EXTRA STUFF -->
+
+  <section id="extra" role="tabpanel" hidden>
+
+    <!-- h1, h2, h3, p, ul, ol, pre, code, images, img here. -->
+
+    <h1>Featured in</h1>
+
+    <ul>
+      <li>on ringlink</li>
+    </ul>
+
+  </section>
+
 </main>
 
 <!-- RANDOM ZUNDAMON -->
@@ -605,7 +622,7 @@ document.querySelectorAll("[data-tab]").forEach(button => {
       tab.setAttribute("aria-selected", tab === button);
     });
 
-    ["home", "members", "join"].forEach(id => {
+    ["home", "members", "join", "extra"].forEach(id => {
       document.getElementById(id).hidden =
         id !== button.dataset.tab;
     });
@@ -728,15 +745,10 @@ function getPixelSize(name) {
 if (params.has("widget")) {
   document.documentElement.classList.add("widget-mode");
 
-  // Show only the image and its image map.
   document.body.append(widgetContainer);
 
   const requestedWidth = getPixelSize("width");
   const requestedHeight = getPixelSize("height");
-
-  // No dimensions means the image uses its natural dimensions.
-  // One dimension preserves its aspect ratio.
-  // Two dimensions stretch it to the exact requested size.
 
   if (requestedWidth !== null) {
     widgetImage.style.width = requestedWidth + "px";
@@ -754,7 +766,6 @@ const widgetAreas = document.querySelectorAll(
   'map[name="image-map"] area'
 );
 
-// Keep the original coordinates as the source of truth.
 const originalCoords = [...widgetAreas].map(area =>
   area.coords.split(",").map(Number)
 );
